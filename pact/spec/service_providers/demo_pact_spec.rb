@@ -1,13 +1,13 @@
 require_relative 'pact_helper'
 require_relative '../../lib/demo/demo_api_service.rb'
 
-describe Demo::API::Random, :pact => true do
+describe DEMO::API::RANDOM, :pact => true do
 
   let(:agent) do
     agent = Mechanize.new
     agent.follow_meta_refresh = true
     agent.redirect_ok = true
-    agent.extend(Demo::API::Random)
+    agent.extend(DEMO::API::RANDOM)
     agent.host=random_service.mock_service_base_url
     agent
   end
@@ -15,8 +15,8 @@ describe Demo::API::Random, :pact => true do
   def random_service_contract(desc, req, resp)
     case req[:method]
       when 'get'
-        random_service.
-            upon_receiving(req[:path] + ' :: ' + desc).with(
+        random_service
+            .upon_receiving(req[:path] + ' :: ' + desc).with(
             method: :get,
             path: req[:path],
             query: req[:params],
@@ -28,8 +28,8 @@ describe Demo::API::Random, :pact => true do
                 body: resp[:body]
             )
       when 'post'
-        random_service.
-            upon_receiving(req[:path] + desc).with(
+        random_service
+            .upon_receiving(req[:path] + desc).with(
             method: :post,
             path: req[:path],
             body: req[:params],
@@ -43,9 +43,9 @@ describe Demo::API::Random, :pact => true do
     end
   end
 
-  describe 'Random-Service' do
-
+  describe 'Random Service' do
     describe 'API - /api' do
+
       it 'returns 200 with random result but correct schema', :aggregate_failures do
         desc = 'randomuser.me - schema check'
         req = {
@@ -67,8 +67,7 @@ describe Demo::API::Random, :pact => true do
                                                 location: {
                                                     street: Pact.like("4354 chester road"),
                                                     city: Pact.like("newcastle upon tyne"),
-                                                    state: Pact.like("leicestershire"),
-                                                    postcode: Pact.like("W33 0GR")
+                                                    state: Pact.like("leicestershire")
                                                 },
                                                 email: Pact.like("matthew.kim@example.com"),
                                                 login: {
@@ -85,7 +84,6 @@ describe Demo::API::Random, :pact => true do
                                                 cell: Pact.like("0717-257-389"),
                                                 id: {
                                                     name: Pact.like("NINO"),
-                                                    value: Pact.like("SK 61 30 28 A")
                                                 },
                                                 picture: {
                                                     large: Pact.like("https://randomuser.me/api/portraits/men/89.jpg"),
@@ -106,7 +104,9 @@ describe Demo::API::Random, :pact => true do
 
       random_service_contract(desc,req,resp)
       agent.random_service(req)
+
       end
+
     end
   end
 end

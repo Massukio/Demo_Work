@@ -1,7 +1,7 @@
-require 'pact'
+require 'pact/consumer/rspec'
 
 Pact.service_consumer "Demo" do
-  has_pact_with "Random-Service" do
+  has_pact_with "Random Service" do
     mock_service :random_service do
       port 1234
     end

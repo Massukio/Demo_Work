@@ -1,8 +1,8 @@
 require 'mechanize'
 
-module Demo
+module DEMO
   module API
-    module Random
+    module RANDOM
 
       attr_accessor :host
 
