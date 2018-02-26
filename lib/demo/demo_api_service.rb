@@ -6,7 +6,7 @@ module DEMO
 
       attr_accessor :host
 
-      def get_randomuser
+      def get_randomuser()
         get @host + '/api'
       end
 
