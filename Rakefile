@@ -14,13 +14,13 @@ namespace :RSPEC do
   rspec_options = '-f JunitFormatter -o rspec_junit_results.xml -f d --color --tag ~wip'
 
   RSpec::Core::RakeTask.new(:run_ALL) do |t|
-    rbfiles = File.join('spec/rspec/**', '*rspec.rb')
+    rbfiles = File.join('spec/rspec/**', '*_spec.rb')
     t.pattern = Dir.glob(rbfiles)
     t.rspec_opts = [rspec_options]
   end
 
   RSpec::Core::RakeTask.new(:dryRun) do |t|
-    rbfiles = File.join('spec/rspec/**', '*rspec.rb')
+    rbfiles = File.join('spec/rspec/**', '*_spec.rb')
     t.pattern = Dir.glob(rbfiles)
     t.rspec_opts = ['--dry-run -f d --color --tag ~wip']
   end

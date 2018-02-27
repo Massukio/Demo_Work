@@ -6,9 +6,15 @@ module DEMO
 
       attr_accessor :host
 
-      def get_randomuser()
-        get @host + '/api'
+      def get_randomuser
+        get @host + '/api', {}
       end
+
+      def get_tax_info(id)
+        get @host + '/api/v1/rest/datastore/'+id
+      end
+
+
 
       def random_service(req)
         case req[:method]
