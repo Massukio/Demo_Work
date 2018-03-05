@@ -1,5 +1,5 @@
 # Demo_Work
-This repo contains below code/struture of UI/API automation testing
+This repo contains below code/struture of UI/API automation testing which is written in Ruby.
 
 *Rspec*
  > spec/rspec/
